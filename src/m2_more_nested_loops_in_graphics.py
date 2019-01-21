@@ -18,6 +18,7 @@ def main():
 def run_test_draw_upside_down_wall():
     """ Tests the    draw_upside_down_wall    function. """
     # Tests 1 and 2 are ALREADY DONE (here).
+
     window = rg.RoseWindow(550, 300, 'Upside-down wall, Tests 1 and 2')
 
     rectangle = rg.Rectangle(rg.Point(125, 230), rg.Point(155, 250))
@@ -30,20 +31,31 @@ def run_test_draw_upside_down_wall():
 
 
 def draw_upside_down_wall(rectangle, n, window):
-    x = rectangle._higher_left_corner.x
-    y = rectangle._higher_left_corner.y
+    x = rectangle.get_upper_left_corner().x
+    y = rectangle.get_upper_left_corner().y
+    x_origin = rectangle.get_upper_left_corner().x
+    y_origin = rectangle.get_upper_left_corner().y
     w = rectangle.get_width()
     h = rectangle.get_height()
+    rectangle.fill_color = 'red'
+    rectangle.attach_to(window)
 
-    for j in range(n):
-        for k in range(j):
-            x = x - x*0.5
+
+    for j in range(n-1):
+        x = x_origin + w * 0.5 * (j+1)
+
+        for k in range(j+2):
+
             upper_left = rg.Point(x,y)
             lower_right = rg.Point(x+w,y-h)
-            rect = rectangle(upper_left, lower_right)
-            rect.
-        x = rectangle._higher_left_corner.x- x*0.5
-        y = y - y*j
+            rect = rg.Rectangle(upper_left, lower_right)
+            rect.attach_to(window)
+            x = x - w
+
+            window.render()
+        y = y_origin - h * (j+1)
+
+
 
 
 
@@ -68,7 +80,7 @@ def draw_upside_down_wall(rectangle, n, window):
     and n is nonnegative.
     """
     # -------------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     Some tests are already written for you (above).
     # -------------------------------------------------------------------------
 
